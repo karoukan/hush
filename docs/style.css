@@ -1,0 +1,300 @@
+* { margin: 0; padding: 0; box-sizing: border-box }
+
+body {
+  background: #08090f;
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.stars { position: fixed; inset: 0; z-index: 0 }
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: twinkle var(--dur) ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: var(--o1) }
+  to { opacity: var(--o2) }
+}
+
+#galaxy {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+.phase {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.phase.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#phase-invite .prompt {
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: color 0.3s;
+  letter-spacing: 0.02em;
+}
+
+#phase-invite .prompt:hover { color: rgba(255,255,255,0.55) }
+
+#phase-invite .cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: rgba(255,255,255,0.4);
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0 } }
+
+#phase-mood { gap: 32px }
+
+#phase-mood .question {
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.35);
+}
+
+.moods {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 400px;
+}
+
+.mood-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 0.88rem;
+}
+
+.mood-pill:hover {
+  border-color: var(--c);
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+}
+
+.mood-pill .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.mood-pill .label { color: #475569; transition: color 0.25s }
+.mood-pill:hover .label { color: var(--c) }
+
+#phase-message { gap: 24px; padding: 0 24px }
+
+.mood-chosen { display: flex; align-items: center; gap: 8px; font-size: 0.85rem }
+.mood-chosen .dot { width: 8px; height: 8px; border-radius: 50% }
+
+.input-wrap { width: 100%; max-width: 420px }
+
+.input-wrap input {
+  width: 100%;
+  background: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 1rem;
+  color: #e2e8f0;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-wrap input:focus { border-color: rgba(255,255,255,0.15) }
+.input-wrap input::placeholder { color: #1e293b }
+
+.char-count {
+  text-align: right;
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 0.7rem;
+  color: #475569;
+  margin-top: 6px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.char-count.visible { opacity: 1 }
+.char-count.warn { color: #f87171 }
+
+.push-btn {
+  padding: 14px 48px;
+  border-radius: 16px;
+  border: none;
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  color: #08090f;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.push-btn.ready { opacity: 1; pointer-events: auto }
+.push-btn.ready:hover { transform: scale(1.04) }
+.push-btn.ready:active { transform: scale(0.97) }
+
+#phase-push { background: rgba(0,0,0,0.7) }
+
+.terminal {
+  background: #0d1117;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 320px;
+  width: calc(100% - 80px);
+}
+
+.terminal-line {
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  line-height: 2;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.35s ease;
+}
+
+.terminal-line.visible { opacity: 1; transform: translateY(0) }
+.terminal-line.muted { color: #475569 }
+
+#phase-reveal {
+  z-index: 5;
+  justify-content: flex-end;
+  padding-bottom: 62px;
+  gap: 20px;
+  pointer-events: none;
+}
+#phase-reveal.active { pointer-events: none } /* let clicks through to canvas */
+#phase-reveal > * { pointer-events: auto }
+
+#phase-reveal .reveal-text {
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  line-height: 1.8;
+}
+
+#phase-reveal .app-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+#phase-reveal .tagline {
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.25);
+  margin-top: 6px;
+}
+
+.store-badge { display: inline-block; transition: opacity 0.2s }
+.store-badge img { height: 48px }
+.store-badge:hover { opacity: 0.8 }
+
+.reveal-footer { position: absolute; bottom: 20px; display: flex; gap: 24px }
+.reveal-footer a {
+  color: rgba(255,255,255,0.2);
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: color 0.2s;
+}
+.reveal-footer a:hover { color: rgba(255,255,255,0.5) }
+
+.commit-detail {
+  position: fixed;
+  z-index: 50;
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 240px;
+  max-width: 300px;
+  opacity: 0;
+  transform: scale(0.92) translateY(8px);
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.commit-detail.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.commit-detail .cd-mood { display: flex; align-items: center; gap: 8px; margin-bottom: 12px }
+.commit-detail .cd-dot { width: 8px; height: 8px; border-radius: 50% }
+.commit-detail .cd-label { font-size: 0.82rem }
+.commit-detail .cd-message {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.commit-detail .cd-entry {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.commit-detail .cd-entry:last-child { border-bottom: none }
+.commit-detail .cd-mood { display: flex; align-items: center; gap: 8px; margin-bottom: 6px }
+.commit-detail .cd-dot { width: 6px; height: 6px; border-radius: 50% }
+.commit-detail .cd-label { font-size: 0.75rem }
+.commit-detail .cd-message {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+.commit-detail .cd-meta { display: flex; align-items: center; gap: 10px }
+.commit-detail .cd-time { font-size: 0.7rem; color: #475569 }
+.commit-detail .cd-hash {
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 0.65rem;
+  color: #1e293b;
+}
+.commit-detail .cd-title {
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.2);
+  margin-bottom: 8px;
+}

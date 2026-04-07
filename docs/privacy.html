@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hush — Privacy Policy</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0A0A0F;
+            color: rgba(255,255,255,0.75);
+            font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        h1 {
+            color: #fff;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+        .date {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.3);
+            font-family: ui-monospace, monospace;
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+        p { margin-bottom: 16px; }
+        a { color: #B8A9E8; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .back {
+            display: inline-block;
+            margin-top: 40px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="content"></div>
+
+<script>
+var isFr = (navigator.language || 'en').startsWith('fr')
+
+var t = {
+    fr: {
+        title: "Politique de confidentialité",
+        date: "Dernière mise à jour : 10 mars 2026",
+        sections: [
+            { h: "Données collectées", p: "Hush ne collecte <strong>aucune donnée personnelle</strong>. Toutes vos pensées (commits) sont stockées localement sur votre appareil via le framework SwiftData d'Apple." },
+            { h: "Synchronisation iCloud", p: "Si vous activez la synchronisation iCloud, vos données sont transférées via CloudKit (infrastructure Apple) et stockées dans votre compte iCloud personnel. Hush n'a pas accès à votre compte iCloud et ne peut pas lire vos données synchronisées." },
+            { h: "Analyses et suivi", p: "Hush n'utilise aucun outil d'analyse, aucun tracker, aucun SDK tiers. Aucune donnée n'est envoyée à des serveurs externes." },
+            { h: "Notifications", p: "Les rappels sont planifiés localement sur votre appareil. Aucune information n'est transmise à un serveur pour les notifications." },
+            { h: "Achats intégrés", p: "Les achats in-app sont gérés entièrement par Apple via StoreKit. Hush ne collecte ni ne stocke aucune information de paiement." },
+            { h: "Contact", p: "Pour toute question concernant cette politique, contactez-nous à <a href=\"mailto:processordumblecore@proton.me\">processordumblecore@proton.me</a>." }
+        ],
+        back: "← Retour à Hush"
+    },
+    en: {
+        title: "Privacy Policy",
+        date: "Last updated: March 10, 2026",
+        sections: [
+            { h: "Data collected", p: "Hush collects <strong>no personal data</strong>. All your thoughts (commits) are stored locally on your device using Apple's SwiftData framework." },
+            { h: "iCloud sync", p: "If you enable iCloud sync, your data is transferred via CloudKit (Apple infrastructure) and stored in your personal iCloud account. Hush has no access to your iCloud account and cannot read your synced data." },
+            { h: "Analytics and tracking", p: "Hush uses no analytics tools, no trackers, and no third-party SDKs. No data is sent to external servers." },
+            { h: "Notifications", p: "Reminders are scheduled locally on your device. No information is transmitted to a server for notifications." },
+            { h: "In-app purchases", p: "In-app purchases are handled entirely by Apple via StoreKit. Hush does not collect or store any payment information." },
+            { h: "Contact", p: "For any questions about this policy, reach out at <a href=\"mailto:processordumblecore@proton.me\">processordumblecore@proton.me</a>." }
+        ],
+        back: "← Back to Hush"
+    }
+}
+
+var l = t[isFr ? 'fr' : 'en']
+document.documentElement.lang = isFr ? 'fr' : 'en'
+document.title = 'Hush — ' + l.title
+
+var html = '<h1>' + l.title + '</h1><p class="date">' + l.date + '</p>'
+for (var i = 0; i < l.sections.length; i++) {
+    html += '<h2>' + l.sections[i].h + '</h2><p>' + l.sections[i].p + '</p>'
+}
+html += '<a class="back" href="./">' + l.back + '</a>'
+document.getElementById('content').innerHTML = html
+</script>
+</body>
+</html>

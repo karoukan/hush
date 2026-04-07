@@ -1,0 +1,5 @@
+# Tout ignorer sauf docs/
+*
+!docs/
+!docs/**
+!.gitignore

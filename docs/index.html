@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Hush</title>
+  <meta name="description" content="Push your thoughts. Watch your galaxy grow.">
+  <meta property="og:title" content="Hush — git push origin thoughts">
+  <meta property="og:description" content="A minimalist emotional journal that turns your thoughts into stars.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://karoukan.github.io/hush/">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<canvas id="galaxy"></canvas>
+<div class="commit-detail" id="commit-detail"></div>
+
+<div class="phase active" id="phase-invite">
+  <span class="prompt" id="invite-prompt"><span class="cursor-blink"></span></span>
+</div>
+
+<div class="phase" id="phase-mood">
+  <p class="question" id="mood-question"></p>
+  <div class="moods" id="moods"></div>
+</div>
+
+<div class="phase" id="phase-message">
+  <div class="mood-chosen" id="mood-chosen"></div>
+  <div class="input-wrap">
+    <input type="text" id="msg-input" maxlength="72" autocomplete="off" spellcheck="false">
+    <div class="char-count" id="char-count"></div>
+  </div>
+  <button class="push-btn" id="push-btn">push</button>
+</div>
+
+<div class="phase" id="phase-push">
+  <div class="terminal" id="terminal"></div>
+</div>
+
+<div class="phase" id="phase-reveal">
+  <div style="text-align:center">
+    <p class="reveal-text" id="reveal-text"></p>
+    <p class="app-name">Hush</p>
+    <p class="tagline">git push origin thoughts</p>
+  </div>
+  <a class="store-badge" href="https://apps.apple.com/app/hush/id6760348415">
+    <img id="store-badge" alt="Download on the App Store">
+  </a>
+  <div class="reveal-footer">
+    <a href="privacy.html" id="privacy-link"></a>
+    <a href="mailto:processordumblecore@proton.me">Support</a>
+  </div>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
